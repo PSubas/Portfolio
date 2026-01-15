@@ -1,0 +1,131 @@
+.projects {
+    padding: var(--space-2xl) 0;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    /* overflow: hidden; Removed to allow sticky/normal flow if needed */
+}
+
+.header {
+    padding: 0 var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.header h2 {
+    font-size: 3rem;
+    color: var(--color-text);
+}
+
+.header p {
+    color: var(--color-text-muted);
+}
+
+.trackContainer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+.track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    width: 100%;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05); /* Slightly more visible */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Clearer border */
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    /* Removed min-width that causes overflow */
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.cardImage {
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cardImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .cardImage img {
+    transform: scale(1.1);
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .overlay {
+    opacity: 1;
+}
+
+.iconBtn {
+    background: white;
+    color: black;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.iconBtn:hover {
+    transform: scale(1.1);
+}
+
+.cardContent {
+    padding: var(--space-md);
+}
+
+.cardContent h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-sm);
+}
+
+.tags {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-top: var(--space-md);
+}
+
+.tags span {
+    background: rgba(255,255,255,0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--color-secondary);
+}
+
+@media (max-width: 768px) {
+    .track {
+        grid-template-columns: 1fr;
+    }
+}
