@@ -8,6 +8,16 @@
   overflow: hidden;
 }
 
+/* Fix viewport height on mobile - use dynamic viewport height */
+@media (max-width: 768px) {
+  .hero {
+    height: 100dvh; /* Dynamic viewport height - accounts for mobile browser UI */
+    /* Fallback for browsers that don't support dvh */
+    min-height: 100vh;
+    min-height: -webkit-fill-available; /* iOS Safari fallback */
+  }
+}
+
 .background {
   position: absolute;
   top: 0;

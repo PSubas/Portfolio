@@ -7,6 +7,14 @@
     background: radial-gradient(circle at bottom right, #1a1a2e, var(--color-bg));
 }
 
+/* Fix viewport height on mobile */
+@media (max-width: 768px) {
+    .contact {
+        min-height: 100dvh; /* Dynamic viewport height */
+        min-height: -webkit-fill-available; /* iOS Safari fallback */
+    }
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;

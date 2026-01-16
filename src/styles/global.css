@@ -42,10 +42,32 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Mobile touch optimization */
+  touch-action: pan-y pinch-zoom; /* Allow vertical scroll and pinch zoom */
+  -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
 }
 
-body {
-  overflow: hidden; /* Locomotive Scroll requirement usually, or handled by library */
+/* Only hide overflow when Locomotive Scroll is active on desktop */
+body:not(.mobile-scroll) {
+  overflow: hidden; /* Locomotive Scroll requirement for desktop */
+}
+
+/* Mobile: allow native scrolling */
+@media (max-width: 768px) {
+  body {
+    overflow: auto !important;
+    position: relative !important;
+  }
+
+  html {
+    overflow: auto !important;
+    position: relative !important;
+  }
+
+  html[class~="has-scroll-smooth"] {
+    overflow: auto !important;
+    position: relative !important;
+  }
 }
 
 a {
@@ -65,12 +87,18 @@ ul {
   list-style: none;
 }
 
-/* Locomotive Scroll fix */
-html[class~="has-scroll-smooth"] {
+/* Locomotive Scroll fix - only apply on desktop */
+html[class~="has-scroll-smooth"]:not(.mobile-scroll) {
   overflow: hidden;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+}
+
+/* Mobile scroll container optimization */
+[data-scroll-container] {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
