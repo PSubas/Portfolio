@@ -121,7 +121,6 @@ This project is private and personal.
 
 ## 👤 Author
 
-Your Name
 Subas Panta
 ---
 
