@@ -122,7 +122,7 @@ This project is private and personal.
 ## 👤 Author
 
 Your Name
-
+Subas Panta
 ---
 
 Built with ❤️ using React, TypeScript, and Vite
