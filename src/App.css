@@ -1,13 +1,3 @@
-/*
-  This project’s global/layout styles live in:
-  - src/styles/global.css
-  - component-level *.module.css files
-
-  Keep this file minimal to avoid accidentally reintroducing the default
-  Vite template styling (centered layout, logo animations, etc.) if it gets
-  imported again.
-*/
-
 #root {
   width: 100%;
   min-height: 100%;
