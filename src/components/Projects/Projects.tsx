@@ -1,53 +1,99 @@
-import React, { useRef } from 'react';
-import { GithubLogo, ArrowUpRight } from '@phosphor-icons/react';
-import styles from './Projects.module.css';
-
-
+import React, { useRef } from "react";
+import { GithubLogo, ArrowUpRight } from "@phosphor-icons/react";
+import { PROJECTS, TEXT_CONTENT } from "../../constants/constants";
 
 const Projects: React.FC = () => {
-    const sectionRef = useRef<HTMLElement>(null);
-    const trackRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-    const projects = [
-        { title: "Project Alpha", desc: "E-commerce Platform", image: "https://placehold.co/600x400/1a1a1a/FFF", tech: ["React", "Node", "Stripe"] },
-        { title: "Project Beta", desc: "Social Dashboard", image: "https://placehold.co/600x400/2a2a2a/FFF", tech: ["Vue", "Firebase", "D3"] },
-        { title: "Project Gamma", desc: "AI Chat Interface", image: "https://placehold.co/600x400/3a3a3a/FFF", tech: ["Next.js", "OpenAI", "Tailwind"] },
-        { title: "Project Delta", desc: "Crypto Portfolio", image: "https://placehold.co/600x400/4a4a4a/FFF", tech: ["React Native", "Web3", "Graph"] },
-        { title: "Project Epsilon", desc: "Travel App", image: "https://placehold.co/600x400/5a5a5a/FFF", tech: ["Flutter", "Dart", "Firebase"] },
-        { title: "Project Zeta", desc: "Dev Tools", image: "https://placehold.co/600x400/6a6a6a/FFF", tech: ["Rust", "Tauri", "Svelte"] },
-    ];
+  return (
+    <section
+      className="py-32 min-h-screen w-full flex flex-col justify-center relative"
+      id="projects"
+      ref={sectionRef}
+      data-scroll-section
+    >
+      <div className="px-8 mb-8">
+        <h2 className="text-5xl text-text font-bold">
+          {TEXT_CONTENT.PROJECTS.HEADING}
+        </h2>
+        <p className="text-text-muted">{TEXT_CONTENT.PROJECTS.SUBHEADING}</p>
+      </div>
 
-    return (
-        <section className={styles.projects} id="projects" ref={sectionRef} data-scroll-section>
-            <div className={styles.header}>
-                <h2>Selected Works</h2>
-                <p>Explore some of my selected works</p>
-            </div>
-            
-            <div className={styles.trackContainer}>
-                <div className={styles.track} ref={trackRef}>
-                    {projects.map((project, i) => (
-                        <div key={i} className={styles.card}>
-                            <div className={styles.cardImage}>
-                                <img src={project.image} alt={project.title} />
-                                <div className={styles.overlay}>
-                                    <button className={styles.iconBtn}><GithubLogo size={24} /></button>
-                                    <button className={styles.iconBtn}><ArrowUpRight size={24} /></button>
-                                </div>
-                            </div>
-                            <div className={styles.cardContent}>
-                                <h3>{project.title}</h3>
-                                <p>{project.desc}</p>
-                                <div className={styles.tags}>
-                                    {project.tech.map((t, k) => <span key={k}>{t}</span>)}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+      <div className="w-full max-w-5xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+          {PROJECTS.map((project, i) => (
+            <div
+              key={i}
+              className="bg-glass border border-glass-border rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/40 hover:border-glass-border/60 flex flex-col h-full"
+            >
+              {/* Image Section */}
+              <div className="h-48 relative overflow-hidden shrink-0">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+
+              {/* Content Section */}
+              <div className="p-5 flex flex-col gap-4 flex-1">
+                {/* Header: Title + Always-Visible Links */}
+                <div className="flex justify-between items-baseline gap-3">
+                  <h3 className="text-lg font-bold text-text leading-snug flex-1">
+                    {project.title}
+                  </h3>
+                  {/* Links - Always visible, subtle */}
+                  <div className="flex gap-1.5 shrink-0">
+                    <a
+                      href={project.links.github}
+                      className="w-7 h-7 flex justify-center items-center bg-white/8 border border-white/12 rounded-md text-text transition-all duration-200 hover:bg-white/15 hover:border-white/25 hover:scale-110"
+                      title="GitHub Repository"
+                    >
+                      <GithubLogo size={14} weight="bold" />
+                    </a>
+                    <a
+                      href={project.links.live}
+                      className="w-7 h-7 flex justify-center items-center bg-white/8 border border-white/12 rounded-md text-text transition-all duration-200 hover:bg-white/15 hover:border-white/25 hover:scale-110"
+                      title="Live Demo"
+                    >
+                      <ArrowUpRight size={14} weight="bold" />
+                    </a>
+                  </div>
                 </div>
+
+                {/* Role / Contribution - Primary info after title */}
+                <p className="text-sm text-text leading-relaxed font-medium">
+                  {project.role}
+                </p>
+
+                {/* Project Type - Secondary typography */}
+                <p className="text-xs font-medium text-text-muted uppercase tracking-widest">
+                  {project.type}
+                </p>
+
+                {/* Tech Stack Tags - For instant scanning */}
+                <div className="flex gap-2 flex-wrap">
+                  {project.tech.map((t, k) => (
+                    <span
+                      key={k}
+                      className="bg-white/5 border border-white/8 px-2 py-1 rounded-md text-xs text-text-muted font-medium tracking-wide transition-all duration-200 hover:bg-white/10 hover:border-white/12"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Reflection / Learning - Optional context */}
+                <p className="text-xs text-text-muted leading-relaxed italic pt-3 border-t border-white/8">
+                  {project.reflection}
+                </p>
+              </div>
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Projects;

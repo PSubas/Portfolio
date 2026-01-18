@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Footer.module.css";
 
 type ParticleStyle = {
   left: string;
@@ -15,17 +14,24 @@ const particles: ParticleStyle[] = [...Array(10)].map(() => ({
 
 const Footer: React.FC = () => {
   return (
-    <footer className={styles.footer} data-scroll-section>
-      <div className={styles.particles}>
+    <footer
+      className="relative px-8 py-8 bg-black border-t border-white/10 overflow-hidden"
+      data-scroll-section
+    >
+      <div className="absolute inset-0 pointer-events-none">
         {/* Simple CSS-based particles */}
         {particles.map((style, i) => (
-          <div key={i} className={styles.particle} style={style} />
+          <div
+            key={i}
+            className="absolute -bottom-2.5 w-1 h-1 bg-blue-500 rounded-full opacity-50 animate-rise"
+            style={style}
+          />
         ))}
       </div>
 
-      <div className={styles.content}>
+      <div className="flex justify-between items-center relative z-10 text-gray-400 text-sm md:flex-col md:gap-2">
         <p>&copy; {new Date().getFullYear()} Subas. All rights reserved.</p>
-        <div className={styles.links}>
+        <div className="flex gap-4">
           <a href="#">Privacy</a>
           <a href="#">Terms</a>
         </div>

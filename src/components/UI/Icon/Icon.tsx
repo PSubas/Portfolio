@@ -1,7 +1,6 @@
-import React from 'react';
-import { icons } from './icons';
-import type { IconName } from './icons';
-import styles from './Icon.module.css';
+import React from "react";
+import { icons } from "./icons";
+import type { IconName } from "./icons";
 
 interface IconProps {
   name: IconName;
@@ -14,9 +13,9 @@ interface IconProps {
 const Icon: React.FC<IconProps> = ({
   name,
   size = 24,
-  color = 'currentColor',
-  className = '',
-  viewBox = '0 0 24 24',
+  color = "currentColor",
+  className = "",
+  viewBox = "0 0 24 24",
 }) => {
   const pathData = icons[name];
 
@@ -32,7 +31,7 @@ const Icon: React.FC<IconProps> = ({
       viewBox={viewBox}
       fill={color}
       xmlns="http://www.w3.org/2000/svg"
-      className={`${styles.icon} ${className}`}
+      className={`inline-block align-middle transition-all duration-200 ease-in-out ${className}`}
       aria-hidden="true"
     >
       <path d={pathData} />
