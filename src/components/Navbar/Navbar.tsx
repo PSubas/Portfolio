@@ -77,12 +77,24 @@ const Navbar: React.FC = () => {
   ) => {
     e.preventDefault();
     setIsOpen(false);
-    if (scroll) {
-      const target = document.querySelector(targetId);
-      if (target) {
+
+    const target = document.querySelector(targetId);
+    if (!target) return;
+
+    // Try LocomotiveScroll first
+    if (scroll && typeof scroll.scrollTo === "function") {
+      try {
         scroll.scrollTo(target as HTMLElement);
-        setActiveSection(targetId); // Update active section on click
+      } catch (error) {
+        console.warn(
+          "LocomotiveScroll failed, falling back to native scroll",
+          error,
+        );
+        target.scrollIntoView({ behavior: "smooth" });
       }
+    } else {
+      // Fallback to native smooth scroll
+      target.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -166,7 +178,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed top-0 left-0 w-screen h-screen bg-black/80 backdrop-blur-sm z-30 transition-opacity duration-base ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        className={`fixed top-0 left-0 w-screen h-screen bg-black/80 backdrop-blur-sm z-30 transition-opacity duration-base pointer-events-none md:hidden ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
         onClick={() => setIsOpen(false)}
       ></div>
     </nav>
