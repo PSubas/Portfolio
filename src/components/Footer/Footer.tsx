@@ -15,7 +15,7 @@ const particles: ParticleStyle[] = [...Array(10)].map(() => ({
 const Footer: React.FC = () => {
   return (
     <footer
-      className="relative px-8 py-8 bg-black border-t border-white/10 overflow-hidden"
+      className="relative px-4 py-6 bg-black border-t border-glass-border overflow-hidden"
       data-scroll-section
     >
       <div className="absolute inset-0 pointer-events-none">
@@ -23,17 +23,27 @@ const Footer: React.FC = () => {
         {particles.map((style, i) => (
           <div
             key={i}
-            className="absolute -bottom-2.5 w-1 h-1 bg-blue-500 rounded-full opacity-50 animate-rise"
+            className="absolute -bottom-1 w-1 h-1 bg-secondary rounded-full opacity-50 animate-rise"
             style={style}
           />
         ))}
       </div>
 
-      <div className="flex justify-between items-center relative z-10 text-gray-400 text-sm md:flex-col md:gap-2">
+      <div className="flex justify-between items-center relative z-10 text-text-muted text-sm md:flex-col md:gap-2">
         <p>&copy; {new Date().getFullYear()} Subas. All rights reserved.</p>
-        <div className="flex gap-4">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
+        <div className="flex gap-6">
+          <a
+            href="#"
+            className="text-text-muted transition-colors duration-base hover:text-text"
+          >
+            Privacy
+          </a>
+          <a
+            href="#"
+            className="text-text-muted transition-colors duration-base hover:text-text"
+          >
+            Terms
+          </a>
         </div>
       </div>
     </footer>

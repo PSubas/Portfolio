@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     // Detect mobile devices - disable smooth scroll on mobile for native performance
     const isMobile =
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
+        navigator.userAgent,
       ) || window.innerWidth <= 768;
 
     // Add mobile class to body for CSS targeting

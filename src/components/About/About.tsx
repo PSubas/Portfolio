@@ -1,84 +1,87 @@
 import React, { useRef } from "react";
-import {
-  FileHtml,
-  FileCss,
-  FileJs,
-  Atom,
-  Wind,
-  BracketsCurly,
-} from "@phosphor-icons/react";
 
 const About: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
-  const skills = [
-    { icon: FileHtml, name: "HTML", color: "#E44D26" },
-    { icon: FileCss, name: "CSS", color: "#264DE4" },
-    { icon: FileJs, name: "JS", color: "#F7DF1E" },
-    { icon: Atom, name: "React", color: "#61DAFB" },
-    { icon: Wind, name: "GSAP", color: "#88CE02" },
-    { icon: BracketsCurly, name: "Next.js", color: "#FFFFFF" },
-  ];
-
   return (
     <section
-      className="min-h-screen px-6 py-32 flex items-center justify-center bg-linear-to-b from-slate-900 to-slate-800"
+      className="relative w-full py-24 flex flex-col overflow-hidden px-6 lg:px-12"
       id="about"
       data-scroll-section
       ref={sectionRef}
     >
-      <div className="max-w-5xl w-full grid grid-cols-2 gap-12 items-center md:grid-cols-1 md:text-center">
-        <div>
-          <div className="relative w-96 h-96 flex justify-center items-center">
-            <div className="w-80 h-80 rounded-full bg-slate-700 border border-slate-600 flex justify-center items-center z-10 overflow-hidden transition-transform duration-500 ease-out hover:scale-105 hover:rotate-5">
-              <img
-                src="/profile22-Picsart.png"
-                alt="Profile"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-            <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full border-2 border-dashed border-blue-500 opacity-50 animate-spin"
-              style={{ animationDuration: "20s" }}
-            ></div>
-          </div>
+      {/* Main Container - Standard Layout */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col">
+        {/* Heading */}
+        <div className="mb-12">
+          <h2 className="text-5xl font-bold mb-4 text-text">About Me</h2>
         </div>
 
-        <div>
-          <div>
-            <h2 className="text-5xl mb-6 text-white">About Me</h2>
-            <p className="text-lg leading-relaxed text-gray-300 mb-8 max-w-xl">
-              I am a passionate creative developer focused on building immersive
-              digital experiences. Merging technical mastery with artistic
-              vision, I create websites that leave a lasting impression.
-            </p>
+        {/* Content Grid */}
+        <div className="w-full flex flex-col md:flex-row gap-10 lg:gap-16 items-start">
+          {/* Image Column */}
+          <div className="flex justify-start">
+            <div className="relative flex justify-center items-center w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64">
+              <div className="absolute rounded-full bg-linear-to-br from-primary/10 to-transparent border border-white/8 flex justify-center items-center z-10 overflow-hidden transition-all duration-base ease-out hover:scale-105 w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 shadow-lg shadow-black/20">
+                <img
+                  src="/profile22-Picsart.png"
+                  alt="Profile"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
-            {skills.map((skill, index) => (
-              <div
-                key={index}
-                className="bg-slate-700 border border-slate-600 rounded-xl p-4 flex flex-col items-center gap-2 transition-all duration-300 cursor-default hover:bg-slate-700/50 hover:-translate-y-1"
-                style={{ "--hover-color": skill.color } as React.CSSProperties}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor =
-                    skill.color;
-                  (e.currentTarget as HTMLDivElement).style.boxShadow =
-                    `0 5px 15px rgba(0,0,0,0.3), 0 0 10px ${skill.color}`;
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = "";
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = "";
-                }}
-              >
-                <skill.icon size={48} weight="duotone" />
-                <span className="text-sm font-medium">{skill.name}</span>
-              </div>
-            ))}
+          {/* Text Column */}
+          <div className="flex flex-col pt-8 md:pt-12 max-w-2xl">
+            {/* Strong Opening - Answers: What level are you? */}
+            <p className="text-xl md:text-2xl font-bold leading-snug text-text mb-8">
+              I build{" "}
+              <span className="text-secondary">
+                production-grade interfaces
+              </span>{" "}
+              at scale.
+            </p>
+
+            {/* Proof Points - Answers: What problems can you handle? Can I trust you with ownership? */}
+            <div className="mb-6">
+              <ul className="space-y-2">
+                <li className="flex gap-3 text-base text-text-muted/90">
+                  <span className="text-secondary font-bold shrink-0">→</span>
+                  <span>
+                    <span className="text-text font-semibold">Complex UIs</span>{" "}
+                    built for performance and reliability
+                  </span>
+                </li>
+                <li className="flex gap-3 text-base text-text-muted/90">
+                  <span className="text-secondary font-bold shrink-0">→</span>
+                  <span>
+                    <span className="text-text font-semibold">
+                      Full-stack ownership
+                    </span>{" "}
+                    from API integration to production deployment
+                  </span>
+                </li>
+                <li className="flex gap-3 text-base text-text-muted/90">
+                  <span className="text-secondary font-bold shrink-0">→</span>
+                  <span>
+                    <span className="text-text font-semibold">
+                      Maintainable code
+                    </span>{" "}
+                    that teams inherit confidently
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Closing Statement - Trust signal */}
+            <p className="text-sm leading-relaxed text-text-muted/70">
+              I ship. I own outcomes. I care about what endures.
+            </p>
           </div>
         </div>
       </div>

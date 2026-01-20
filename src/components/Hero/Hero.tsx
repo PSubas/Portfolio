@@ -1,48 +1,55 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import {
-  TEXT_CONTENT,
-  ANIMATIONS,
-  BRAND_NAME,
-} from "../../constants/constants";
+import { useScroll } from "../../context/scrollContext";
+import { ANIMATIONS, BRAND_NAME } from "../../constants/constants";
 
 const Hero: React.FC = () => {
+  const roleRef = useRef<HTMLParagraphElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLHeadingElement>(null);
-  const ctaRef = useRef<HTMLButtonElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const ctasRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scroll } = useScroll();
 
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.5 }); // Start shortly after mount
+    const tl = gsap.timeline({ delay: 0.4 });
 
     tl.fromTo(
-      titleRef.current,
-      { opacity: 0, y: 50, filter: "blur(10px)" },
-      {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        duration: ANIMATIONS.TITLE_ANIMATION.duration,
-      },
+      containerRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
     )
       .fromTo(
-        subtitleRef.current,
-        { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: ANIMATIONS.SUBTITLE_ANIMATION.duration },
-        ANIMATIONS.SUBTITLE_ANIMATION.offset,
+        roleRef.current,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        0.2,
       )
       .fromTo(
-        ctaRef.current,
-        { opacity: 0, scale: 0.8 },
+        titleRef.current,
+        { opacity: 0, y: 20, filter: "blur(8px)" },
         {
           opacity: 1,
-          scale: 1,
-          duration: ANIMATIONS.CTA_ANIMATION.duration,
-          ease: ANIMATIONS.CTA_ANIMATION.ease,
+          y: 0,
+          filter: "blur(0px)",
+          duration: ANIMATIONS.TITLE_ANIMATION.duration,
+          ease: "power3.out",
         },
-        ANIMATIONS.CTA_ANIMATION.offset,
+        "-=0.3",
+      )
+      .fromTo(
+        descriptionRef.current,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        "-=0.2",
+      )
+      .fromTo(
+        ctasRef.current,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        "-=0.2",
       );
 
-    // Floating Orbs Animation
     gsap.to(".orb", ANIMATIONS.ORB_ANIMATION);
 
     return () => {
@@ -50,76 +57,209 @@ const Hero: React.FC = () => {
     };
   }, []);
 
+  const handleCTAClick = () => {
+    if (!scroll) return;
+    const target = document.querySelector("#about");
+    if (target) scroll.scrollTo(target as HTMLElement);
+  };
+
   return (
     <section
-      className="relative min-h-dvh w-full flex items-center justify-center overflow-hidden"
       id="hero"
       data-scroll-section
+      className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 lg:px-12 pt-16 pb-12"
     >
-      <div className="absolute top-0 left-0 w-full h-full z-0 opacity-0">
-        {/* <iframe 
-          src='https://my.spline.design/orb-QYvvWtSzIRGS0CVIwk6J00i0/' 
-          frameBorder='0' 
-          width='100%' 
-          height='100%'
-          className="w-full h-full border-none pointer-events-none"
-          title="3D Orb"
-        ></iframe> */}
-      </div>
-
-      {/* Ambient Orbs */}
+      {/* Faint Grid Overlay */}
       <div
-        className="orb absolute rounded-full blur-[80px] z-10 opacity-40 pointer-events-none"
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
         style={{
-          width: "300px",
-          height: "300px",
-          background: "var(--color-primary)",
-          top: "20%",
-          left: "10%",
+          backgroundImage: `
+            linear-gradient(0deg, transparent 24%, rgba(var(--color-primary-rgb, 123, 97, 255), 0.1) 25%, rgba(var(--color-primary-rgb, 123, 97, 255), 0.1) 26%, transparent 27%, transparent 74%, rgba(var(--color-primary-rgb, 123, 97, 255), 0.1) 75%, rgba(var(--color-primary-rgb, 123, 97, 255), 0.1) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, rgba(var(--color-primary-rgb, 123, 97, 255), 0.1) 25%, rgba(var(--color-primary-rgb, 123, 97, 255), 0.1) 26%, transparent 27%, transparent 74%, rgba(var(--color-primary-rgb, 123, 97, 255), 0.1) 75%, rgba(var(--color-primary-rgb, 123, 97, 255), 0.1) 76%, transparent 77%, transparent)
+          `,
+          backgroundSize: "60px 60px",
         }}
-      ></div>
-      <div
-        className="orb absolute rounded-full blur-[80px] z-10 opacity-30 pointer-events-none"
-        style={{
-          width: "200px",
-          height: "200px",
-          background: "var(--color-secondary)",
-          bottom: "20%",
-          right: "10%",
-        }}
-      ></div>
+      />
 
-      <div className="relative z-10 text-center pointer-events-none">
-        <h2
-          className="text-2xl text-secondary uppercase tracking-widest font-medium mb-2"
-          ref={subtitleRef}
-        >
-          {TEXT_CONTENT.HERO.TITLE}
-        </h2>
-        <h1
-          className="text-7xl md:text-5xl font-black mb-4 leading-tight drop-shadow-lg"
-          ref={titleRef}
-        >
-          {TEXT_CONTENT.HERO.GREETING}
-          <span
-            className="text-transparent"
-            style={{ WebkitTextStroke: "2px var(--color-primary)" }}
-          >
-            {BRAND_NAME}
-          </span>
-        </h1>
-        <button
-          className="mt-16 px-12 py-4 text-lg font-semibold text-bg bg-primary rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl pointer-events-auto"
+      {/* Background Glows - Matching Reference Image */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-primary/20 blur-[120px] rounded-full opacity-30"
           style={{
-            boxShadow: "0 0 30px rgba(123, 97, 255, 0.5)",
+            background:
+              "radial-gradient(circle, var(--color-primary), transparent 70%)",
           }}
-          ref={ctaRef}
-        >
-          {TEXT_CONTENT.HERO.CTA}
-        </button>
+        />
+        <div
+          className="absolute top-1/3 right-1/4 w-100 h-100 bg-secondary/15 blur-[100px] rounded-full opacity-20"
+          style={{
+            background:
+              "radial-gradient(circle, var(--color-secondary), transparent 70%)",
+          }}
+        />
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-52 bg-linear-to-t from-bg to-transparent z-5"></div>
+      {/* Main Container */}
+      <div className="relative z-10 w-full max-w-350 mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 px-4">
+        {/* Left Column: Content */}
+        <div
+          ref={containerRef}
+          className="flex flex-col flex-1 max-w-5xl lg:items-start text-center lg:text-left"
+        >
+          <h1
+            ref={titleRef}
+            className="text-5xl md:text-7xl lg:text-7xl xl:text-8xl font-black tracking-tight text-white leading-[1.05] mb-2"
+          >
+            Frontend <br />
+            <span className="bg-linear-to-r from-primary/70 via-secondary/70 to-primary/70 bg-clip-text text-transparent opacity-90">
+              Developer
+            </span>
+            <span className="block mt-4 text-2xl md:text-3xl lg:text-4xl font-medium text-text-muted tracking-normal opacity-80">
+              with a focus on end-to-end features
+            </span>
+          </h1>
+
+          <p
+            ref={descriptionRef}
+            className="text-lg md:text-xl text-text-muted font-light leading-relaxed mb-6 max-w-3xl mx-auto lg:mx-0"
+          >
+            Building reliable interfaces that bridge frontend and backend
+            seamlessly.
+          </p>
+
+          <div
+            ref={ctasRef}
+            className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto justify-center lg:justify-start"
+          >
+            {/* Primary CTA */}
+            <button
+              onClick={handleCTAClick}
+              className="group relative inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-bold text-white bg-primary shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-[1.05] hover:shadow-[0_0_40px_rgba(123,97,255,0.5)] hover:bg-primary-light overflow-hidden"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                View My Projects
+                <svg
+                  className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            </button>
+
+            {/* Secondary CTA */}
+            <button
+              onClick={handleCTAClick}
+              className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-medium text-text-muted border border-white/20 bg-transparent backdrop-blur-sm transition-all duration-300 hover:text-text hover:border-white/40 hover:bg-white/5"
+            >
+              Contact Me
+              <svg
+                className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Right Column: Decorative Code Terminal */}
+        <div className="hidden lg:flex flex-1 items-center justify-end relative pl-10">
+          <div className="relative w-full max-w-137.5 aspect-video animate-float">
+            {/* Terminal Window */}
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden shadow-primary/20">
+              {/* Header */}
+              <div className="bg-white/5 px-4 py-3 border-b border-white/5 flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+                <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+                <div className="ml-4 text-[10px] uppercase tracking-widest text-text-muted opacity-50 font-bold">
+                  experience.ts
+                </div>
+              </div>
+              {/* Code Area */}
+              <div className="p-6 font-mono text-sm leading-relaxed">
+                <div className="flex gap-4">
+                  <span className="text-text-muted opacity-30 select-none">
+                    01
+                  </span>
+                  <span className="text-secondary">const</span>
+                  <span className="text-primary">developer</span>
+                  <span className="text-white">=</span>
+                  <span className="text-white">{"{"}</span>
+                </div>
+                <div className="flex gap-4">
+                  <span className="text-text-muted opacity-30 select-none">
+                    02
+                  </span>
+                  <span className="pl-4 text-white">name:</span>
+                  <span className="text-[#ce9178]">'{BRAND_NAME}'</span>
+                  <span className="text-white">,</span>
+                </div>
+                <div className="flex gap-4">
+                  <span className="text-text-muted opacity-30 select-none">
+                    03
+                  </span>
+                  <span className="pl-4 text-white">role:</span>
+                  <span className="text-[#ce9178]">'Frontend Engineer'</span>
+                  <span className="text-white">,</span>
+                </div>
+                <div className="flex gap-4">
+                  <span className="text-text-muted opacity-30 select-none">
+                    04
+                  </span>
+                  <span className="pl-4 text-white">skills:</span>
+                  <span className="text-white">[</span>
+                  <span className="text-[#ce9178]">'React'</span>
+                  <span className="text-white">,</span>
+                  <span className="text-[#ce9178]">'Next Js'</span>
+                  <span className="text-white">,</span>
+                  <span className="text-[#ce9178]">'Node Js'</span>
+                  <span className="text-white">]</span>
+                </div>
+                <div className="flex gap-4">
+                  <span className="text-text-muted opacity-30 select-none">
+                    05
+                  </span>
+                  <span className="text-white">{"}"}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating Glows around Terminal */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 blur-[60px] animate-pulse" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/10 blur-[60px] animate-pulse" />
+          </div>
+
+          {/* Abstract Grid Elements Behind Terminal */}
+          <div
+            className="absolute inset-0 -z-10 opacity-20"
+            style={{
+              backgroundImage:
+                "radial-gradient(var(--color-primary) 1px, transparent 1px)",
+              backgroundSize: "30px 30px",
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Subtle Bottom Fade */}
+      <div className="pointer-events-none absolute bottom-0 left-0 h-40 w-full bg-linear-to-t from-bg via-bg/40 to-transparent" />
     </section>
   );
 };

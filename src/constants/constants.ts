@@ -61,33 +61,6 @@ export const PROJECTS: Project[] = [
     reflection: "Optimized chat latency from 2s to 200ms using streaming",
     links: { github: "#", live: "#" },
   },
-  {
-    title: "Project Delta",
-    type: "Crypto Portfolio",
-    image: "https://placehold.co/600x400/4a4a4a/FFF",
-    tech: ["React Native", "Web3", "Graph"],
-    role: "Mobile development & blockchain integration",
-    reflection: "Managed $5M+ in wallet balances across multiple chains",
-    links: { github: "#", live: "#" },
-  },
-  {
-    title: "Project Epsilon",
-    type: "Travel App",
-    image: "https://placehold.co/600x400/5a5a5a/FFF",
-    tech: ["Flutter", "Dart", "Firebase"],
-    role: "Mobile app development",
-    reflection: "Achieved 95% uptime with optimized offline-first architecture",
-    links: { github: "#", live: "#" },
-  },
-  {
-    title: "Project Zeta",
-    type: "Dev Tools",
-    image: "https://placehold.co/600x400/6a6a6a/FFF",
-    tech: ["Rust", "Tauri", "Svelte"],
-    role: "Core development & CLI design",
-    reflection: "Reduced build times by 60% for 2000+ developers",
-    links: { github: "#", live: "#" },
-  },
 ];
 
 // ============================================================================
@@ -180,9 +153,10 @@ export const SECTION_IDS = {
 
 export const TEXT_CONTENT = {
   HERO: {
-    TITLE: "Web Developer",
-    GREETING: "Hi, I'm ",
-    CTA: "Hire Me",
+    TITLE: "Frontend Developer with a focus on end-to-end features",
+    GREETING:
+      "I build reliable interfaces and thoughtful features. I connect frontend and backend systems to deliver real, user-focused functionality",
+    CTA: "Learn more about how I work",
   },
   PROJECTS: {
     HEADING: "Selected Works",
