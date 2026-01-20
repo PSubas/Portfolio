@@ -5,7 +5,7 @@ const About: React.FC = () => {
 
   return (
     <section
-      className="relative w-full py-24 flex flex-col overflow-hidden px-6 lg:px-12"
+      className="relative w-full py-16 sm:py-24 flex flex-col overflow-hidden px-6 lg:px-12"
       id="about"
       data-scroll-section
       ref={sectionRef}
@@ -13,12 +13,12 @@ const About: React.FC = () => {
       {/* Main Container - Standard Layout */}
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col">
         {/* Heading */}
-        <div className="mb-12">
-          <h2 className="text-5xl font-bold mb-4 text-text">About Me</h2>
+        <div className="mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-text">About Me</h2>
         </div>
 
         {/* Content Grid */}
-        <div className="w-full flex flex-col md:flex-row gap-10 lg:gap-16 items-start">
+        <div className="w-full flex flex-col md:flex-row gap-8 sm:gap-10 lg:gap-16 items-start">
           {/* Image Column */}
           <div className="flex justify-start">
             <div className="relative flex justify-center items-center w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64">
@@ -37,7 +37,7 @@ const About: React.FC = () => {
           </div>
 
           {/* Text Column */}
-          <div className="flex flex-col pt-8 md:pt-12 max-w-2xl">
+          <div className="flex flex-col pt-4 sm:pt-8 md:pt-12 max-w-2xl">
             {/* Strong Opening - Answers: What level are you? */}
             <p className="text-xl md:text-2xl font-bold leading-snug text-text mb-8">
               I build{" "}

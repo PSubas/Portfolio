@@ -30,7 +30,7 @@ const Contact: React.FC = () => {
 
   return (
     <section
-      className="relative w-full py-24 flex flex-col items-center justify-center overflow-hidden px-6 lg:px-12 min-h-screen"
+      className="relative w-full py-16 sm:py-24 flex flex-col items-center justify-center overflow-hidden px-6 lg:px-12 min-h-screen"
       id="contact"
       data-scroll-section
     >
@@ -48,10 +48,10 @@ const Contact: React.FC = () => {
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 w-full">
           <div>
-            <h2 className="text-5xl font-bold mb-6 bg-linear-to-r from-text to-primary bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-linear-to-r from-text to-primary bg-clip-text text-transparent">
               {TEXT_CONTENT.CONTACT.HEADING}
             </h2>
-            <p className="text-lg text-text-muted mb-12">
+            <p className="text-base sm:text-lg text-text-muted mb-8 sm:mb-12">
               {TEXT_CONTENT.CONTACT.DESCRIPTION}
             </p>
 

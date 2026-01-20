@@ -81,19 +81,23 @@ const Navbar: React.FC = () => {
     const target = document.querySelector(targetId);
     if (!target) return;
 
-    // Try LocomotiveScroll first
-    if (scroll && typeof scroll.scrollTo === "function") {
+    // Determine if we should use native scroll (mobile or if Locomotive is not smooth)
+    const isMobile = window.innerWidth <= 768;
+
+    // Always update active section immediately for better UX
+    setActiveSection(targetId);
+
+    if (scroll && !isMobile) {
+      // Use LocomotiveScroll on desktop for smooth experience
       try {
         scroll.scrollTo(target as HTMLElement);
       } catch (error) {
-        console.warn(
-          "LocomotiveScroll failed, falling back to native scroll",
-          error,
-        );
+        console.warn("LocomotiveScroll failed, falling back to native", error);
         target.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      // Fallback to native smooth scroll
+      // Fallback to native smooth scroll on mobile or if scroll instance is missing
+      // Native scroll is more reliable for mobile overlays and non-smooth modes
       target.scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -116,7 +120,7 @@ const Navbar: React.FC = () => {
 
         {/* Hamburger Menu Button - Mobile Only */}
         <button
-          className="md:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 z-50 relative"
+          className="md:hidden w-12 h-12 flex flex-col justify-center items-center gap-1.5 z-50 relative"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -132,7 +136,7 @@ const Navbar: React.FC = () => {
         </button>
 
         <div
-          className={`fixed md:static top-0 right-0 md:right-auto w-64 md:w-auto h-screen md:h-auto md:min-h-0 bg-bg-alt md:bg-transparent flex flex-col md:flex-row justify-start md:justify-start items-center md:items-center gap-8 md:gap-12 z-40 transition-all duration-base pt-24 md:pt-0 ${isOpen ? "translate-x-0" : "translate-x-full md:translate-x-0"} border-l md:border-l-0 border-glass-border md:border-none overflow-y-auto md:overflow-visible`}
+          className={`fixed md:static top-0 right-0 md:right-auto w-72 md:w-auto h-screen md:h-auto md:min-h-0 bg-bg-alt md:bg-transparent flex flex-col md:flex-row justify-start md:justify-start items-center md:items-center gap-6 md:gap-12 z-40 transition-all duration-base pt-32 md:pt-0 ${isOpen ? "translate-x-0 outline outline-secondary/10" : "translate-x-full md:translate-x-0"} border-l md:border-l-0 border-glass-border md:border-none overflow-y-auto md:overflow-visible`}
         >
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.id;
@@ -141,14 +145,15 @@ const Navbar: React.FC = () => {
             // Contact CTA Button
             if (isContact) {
               return (
-                <a
-                  key={link.id}
-                  href={link.id}
-                  className="px-5 py-2 text-sm font-semibold text-secondary border-2 border-secondary/40 rounded-full bg-secondary/5 backdrop-blur-sm transition-all duration-base hover:bg-secondary/10 hover:border-secondary/60 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:scale-105 whitespace-nowrap"
-                  onClick={(e) => handleNavClick(e, link.id)}
-                >
-                  {link.label}
-                </a>
+                <div key={link.id} className="w-full md:w-auto px-8 md:px-0 mt-4 md:mt-0">
+                  <a
+                    href={link.id}
+                    className="flex items-center justify-center px-8 py-3 text-sm font-semibold text-secondary border-2 border-secondary/40 rounded-full bg-secondary/5 backdrop-blur-sm transition-all duration-base hover:bg-secondary/10 hover:border-secondary/60 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:scale-105 whitespace-nowrap"
+                    onClick={(e) => handleNavClick(e, link.id)}
+                  >
+                    {link.label}
+                  </a>
+                </div>
               );
             }
 
@@ -157,17 +162,17 @@ const Navbar: React.FC = () => {
               <a
                 key={link.id}
                 href={link.id}
-                className={`text-base font-medium transition-all duration-base relative group whitespace-nowrap ${
+                className={`w-full md:w-auto px-8 md:px-0 py-4 md:py-0 text-lg md:text-base font-medium transition-all duration-base relative group whitespace-nowrap text-center md:text-left ${
                   isActive
                     ? "text-secondary"
-                    : "text-text-muted opacity-70 hover:opacity-100 hover:text-text"
+                    : "text-text-muted opacity-80 hover:opacity-100 hover:text-text"
                 }`}
                 onClick={(e) => handleNavClick(e, link.id)}
               >
                 {link.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-secondary transition-all duration-base ${
-                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  className={`absolute -bottom-1 md:bottom-0 left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 h-0.5 bg-secondary transition-all duration-base ${
+                    isActive ? "w-1/4 md:w-full" : "w-0 group-hover:w-1/4 md:group-hover:w-full"
                   }`}
                 ></span>
               </a>

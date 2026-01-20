@@ -108,7 +108,7 @@ const Hero: React.FC = () => {
         >
           <h1
             ref={titleRef}
-            className="text-5xl md:text-7xl lg:text-7xl xl:text-8xl font-black tracking-tight text-white leading-[1.05] mb-2"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-7xl xl:text-8xl font-black tracking-tight text-white leading-[1.05] mb-4"
           >
             Frontend <br />
             <span className="bg-linear-to-r from-primary/70 via-secondary/70 to-primary/70 bg-clip-text text-transparent opacity-90">
@@ -121,7 +121,7 @@ const Hero: React.FC = () => {
 
           <p
             ref={descriptionRef}
-            className="text-lg md:text-xl text-text-muted font-light leading-relaxed mb-6 max-w-3xl mx-auto lg:mx-0"
+            className="text-base sm:text-lg md:text-xl text-text-muted font-light leading-relaxed mb-8 sm:mb-6 max-w-3xl mx-auto lg:mx-0"
           >
             Building reliable interfaces that bridge frontend and backend
             seamlessly.
@@ -129,7 +129,7 @@ const Hero: React.FC = () => {
 
           <div
             ref={ctasRef}
-            className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto justify-center lg:justify-start"
+            className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto justify-center lg:justify-start mb-8 sm:mb-0"
           >
             {/* Primary CTA */}
             <button
