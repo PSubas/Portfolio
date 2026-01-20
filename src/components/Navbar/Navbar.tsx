@@ -120,7 +120,7 @@ const Navbar: React.FC = () => {
         </button>
 
         <div
-          className={`fixed md:static top-0 right-0 md:right-auto w-64 md:w-auto h-screen md:h-auto md:min-h-0 bg-bg-alt md:bg-transparent flex flex-col md:flex-row justify-center md:justify-start items-center md:items-center gap-8 md:gap-12 z-40 transition-all duration-base ${isOpen ? "translate-x-0" : "translate-x-full md:translate-x-0"} border-l md:border-l-0 border-glass-border md:border-none`}
+          className={`fixed md:static top-0 right-0 md:right-auto w-64 md:w-auto h-screen md:h-auto md:min-h-0 bg-bg-alt md:bg-transparent flex flex-col md:flex-row justify-start md:justify-start items-center md:items-center gap-8 md:gap-12 z-40 transition-all duration-base pt-24 md:pt-0 ${isOpen ? "translate-x-0" : "translate-x-full md:translate-x-0"} border-l md:border-l-0 border-glass-border md:border-none overflow-y-auto md:overflow-visible`}
         >
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.id;
