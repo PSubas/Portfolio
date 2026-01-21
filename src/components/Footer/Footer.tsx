@@ -15,7 +15,7 @@ const particles: ParticleStyle[] = [...Array(10)].map(() => ({
 const Footer: React.FC = () => {
   return (
     <footer
-      className="relative px-4 py-8 sm:py-6 bg-black border-t border-glass-border overflow-hidden"
+      className="relative pb-8 bg-black border-t border-glass-border overflow-hidden"
       data-scroll-section
     >
       <div className="absolute inset-0 pointer-events-none">

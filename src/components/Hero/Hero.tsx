@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ANIMATIONS, BRAND_NAME } from "../../constants/constants";
+import { HERO, SPACING } from "../../constants/tokens";
+import PrimaryButton from "../UI/Button/PrimaryButton";
+import Section from "../common/Section";
 
 const Hero: React.FC = () => {
   const roleRef = useRef<HTMLParagraphElement>(null);
@@ -55,18 +58,18 @@ const Hero: React.FC = () => {
     };
   }, []);
 
-  const handleCTAClick = () => {
-    const target = document.querySelector("#about");
+  const handleScrollTo = (sectionId: string) => {
+    const target = document.querySelector(sectionId);
     if (!target) return;
 
     target.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section
+    <Section
       id="hero"
-      data-scroll-section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 lg:px-12 pt-16 pb-12"
+      spacing="py"
+      className={`${HERO.HEIGHT} flex items-center justify-center`}
     >
       {/* Faint Grid Overlay */}
       <div
@@ -99,28 +102,30 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Main Container */}
-      <div className="relative z-10 w-full max-w-350 mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 px-4">
+      <div
+        className={`relative z-10 w-full max-w-350 mx-auto flex flex-col lg:flex-row items-center justify-between ${HERO.CONTAINER_GAP} px-4`}
+      >
         {/* Left Column: Content */}
         <div
           ref={containerRef}
-          className="flex flex-col flex-1 max-w-5xl lg:items-start text-center lg:text-left"
+          className="flex flex-col flex-1 max-w-5xl lg:items-start text-center lg:text-left pt-12"
         >
           <h1
             ref={titleRef}
-            className="text-4xl sm:text-5xl md:text-7xl lg:text-7xl xl:text-8xl font-black tracking-tight text-white leading-[1.05] mb-4"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-7xl xl:text-8xl font-black tracking-tight text-white leading-[1.05] pb-4"
           >
             Frontend <br />
             <span className="bg-linear-to-r from-primary/70 via-secondary/70 to-primary/70 bg-clip-text text-transparent opacity-90">
               Developer
             </span>
-            <span className="block mt-4 text-2xl md:text-3xl lg:text-4xl font-medium text-text-muted tracking-normal opacity-80">
+            <span className="block pt-4 text-2xl md:text-3xl lg:text-4xl font-medium text-text-muted tracking-normal opacity-80">
               with a focus on end-to-end features
             </span>
           </h1>
 
           <p
             ref={descriptionRef}
-            className="text-base sm:text-lg md:text-xl text-text-muted font-light leading-relaxed mb-8 sm:mb-6 max-w-3xl mx-auto lg:mx-0"
+            className="text-base sm:text-lg md:text-xl text-text-muted font-light leading-relaxed pb-8 sm:pb-6 max-w-3xl mx-auto lg:mx-0"
           >
             Building reliable interfaces that bridge frontend and backend
             seamlessly.
@@ -128,35 +133,16 @@ const Hero: React.FC = () => {
 
           <div
             ref={ctasRef}
-            className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto justify-center lg:justify-start mb-8 sm:mb-0"
+            className={`flex flex-col sm:flex-row ${SPACING.ELEMENT_GAP_SMALL} w-full sm:w-auto justify-center lg:justify-start pb-8 sm:pb-0`}
           >
             {/* Primary CTA */}
-            <button
-              onClick={handleCTAClick}
-              className="group relative inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-bold text-white bg-primary shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-[1.05] hover:shadow-[0_0_40px_rgba(123,97,255,0.5)] hover:bg-primary-light overflow-hidden"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                View My Projects
-                <svg
-                  className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </span>
-              <div className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-            </button>
+            <PrimaryButton onClick={() => handleScrollTo("#projects")}>
+              View My Projects
+            </PrimaryButton>
 
             {/* Secondary CTA */}
             <button
-              onClick={handleCTAClick}
+              onClick={() => handleScrollTo("#contact")}
               className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-medium text-text-muted border border-white/20 bg-transparent backdrop-blur-sm transition-all duration-300 hover:text-text hover:border-white/40 hover:bg-white/5"
             >
               Contact Me
@@ -187,7 +173,7 @@ const Hero: React.FC = () => {
                 <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                 <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
                 <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
-                <div className="ml-4 text-[10px] uppercase tracking-widest text-text-muted opacity-50 font-bold">
+                <div className="pl-4 text-[10px] uppercase tracking-widest text-text-muted opacity-50 font-bold">
                   experience.ts
                 </div>
               </div>
@@ -259,7 +245,7 @@ const Hero: React.FC = () => {
 
       {/* Subtle Bottom Fade */}
       <div className="pointer-events-none absolute bottom-0 left-0 h-40 w-full bg-linear-to-t from-bg via-bg/40 to-transparent" />
-    </section>
+    </Section>
   );
 };
 

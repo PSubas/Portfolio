@@ -14,6 +14,7 @@ import {
   FORM_CONFIG,
   ANIMATIONS,
 } from "../../constants/constants";
+import Section from "../common/Section";
 
 const Contact: React.FC = () => {
   const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
@@ -29,11 +30,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section
-      className="relative w-full py-16 sm:py-24 flex flex-col items-center justify-center overflow-hidden px-6 lg:px-12 min-h-screen"
-      id="contact"
-      data-scroll-section
-    >
+    <Section id="contact" className="items-center justify-center min-h-screen">
       {/* Ambient Orbs */}
       <div
         className="absolute bg-primary rounded-full blur-[80px] z-0 pointer-events-none opacity-15 top-[10%] -left-[5%] animate-float"
@@ -44,14 +41,15 @@ const Contact: React.FC = () => {
         style={{ width: "18.75rem", height: "18.75rem" }}
       ></div>
 
-      {/* Main Container - Standard Layout */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 w-full">
-          <div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-linear-to-r from-text to-primary bg-clip-text text-transparent">
+      {/* Main Container */}
+      <div className="relative z-10 w-full flex flex-col">
+        <div className="flex flex-col md:flex-row gap-12 lg:gap-16 w-full items-start">
+          {/* Left Side - Contact Info */}
+          <div className="w-full md:w-1/2">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold pb-4 sm:pb-6 bg-linear-to-r from-text to-primary bg-clip-text text-transparent">
               {TEXT_CONTENT.CONTACT.HEADING}
             </h2>
-            <p className="text-base sm:text-lg text-text-muted mb-8 sm:mb-12">
+            <p className="text-base sm:text-lg text-text-muted pb-8 sm:pb-12">
               {TEXT_CONTENT.CONTACT.DESCRIPTION}
             </p>
 
@@ -79,8 +77,9 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
+          {/* Right Side - Form */}
           <form
-            className="bg-glass border border-glass-border rounded-xl p-8 flex flex-col gap-8 backdrop-blur-sm"
+            className="w-full md:w-1/2 bg-glass border border-glass-border rounded-xl p-8 flex flex-col gap-8 backdrop-blur-sm"
             onSubmit={handleSubmit}
           >
             <div>
@@ -123,7 +122,7 @@ const Contact: React.FC = () => {
           </form>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 

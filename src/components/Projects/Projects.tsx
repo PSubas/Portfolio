@@ -1,21 +1,18 @@
 import React, { useRef } from "react";
 import { GithubLogo, ArrowUpRight } from "@phosphor-icons/react";
+import { SPACING } from "../../constants/tokens";
 import { PROJECTS, TEXT_CONTENT } from "../../constants/constants";
+import Section from "../common/Section";
 
 const Projects: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section
-      className="relative w-full py-16 sm:py-24 flex flex-col items-center justify-center overflow-hidden px-6 lg:px-12 min-h-screen"
-      id="projects"
-      ref={sectionRef}
-      data-scroll-section
-    >
-      {/* Main Container - Standard Layout */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col">
-        <div className="mb-8 sm:mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-text font-bold mb-4">
+    <Section id="projects" ref={sectionRef}>
+      {/* Main Container */}
+      <div className="relative z-10 w-full flex flex-col">
+        <div className={SPACING.CONTENT_BOTTOM_LG}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-text font-bold pb-4">
             {TEXT_CONTENT.PROJECTS.HEADING}
           </h2>
           <p className="text-text-muted text-base">
@@ -47,7 +44,7 @@ const Projects: React.FC = () => {
                       {project.title}
                     </h3>
                     {/* Links - Always visible, subtle */}
-                    <div className="flex gap-sm shrink-0">
+                    <div className="flex gap-2 shrink-0">
                       <a
                         href={project.links.github}
                         className="w-size-sm h-size-sm flex justify-center items-center bg-white/8 border border-white/12 rounded-md text-text transition-all duration-fast hover:bg-white/15 hover:border-white/25 hover:scale-110"
@@ -76,7 +73,7 @@ const Projects: React.FC = () => {
                   </p>
 
                   {/* Tech Stack Tags - For instant scanning */}
-                  <div className="flex gap-sm flex-wrap">
+                  <div className="flex gap-2 flex-wrap">
                     {project.tech.map((t, k) => (
                       <span
                         key={k}
@@ -97,7 +94,7 @@ const Projects: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 

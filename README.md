@@ -19,7 +19,6 @@ A modern, responsive portfolio website built with React, TypeScript, and Vite. F
 - **Build Tool**: Vite
 - **Styling**: CSS Modules
 - **Animations**: GSAP
-- **Smooth Scrolling**: Locomotive Scroll
 - **Icons**: Phosphor Icons
 
 ## 📁 Project Structure
@@ -121,7 +120,6 @@ This project is private and personal.
 
 ## 👤 Author
 
-Subas Panta
----
+## Subas Panta
 
 Built with ❤️ using React, TypeScript, and Vite

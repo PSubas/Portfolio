@@ -118,7 +118,7 @@ const Navbar: React.FC = () => {
               return (
                 <div
                   key={link.id}
-                  className="w-full md:w-auto px-8 md:px-0 mt-4 md:mt-0"
+                  className="w-full md:w-auto px-8 md:px-0 pt-4 md:pt-0"
                 >
                   <a
                     href={link.id}
