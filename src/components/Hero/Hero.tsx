@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { useScroll } from "../../context/scrollContext";
 import { ANIMATIONS, BRAND_NAME } from "../../constants/constants";
 
 const Hero: React.FC = () => {
@@ -9,7 +8,6 @@ const Hero: React.FC = () => {
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const ctasRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scroll } = useScroll();
 
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.4 });
@@ -61,12 +59,7 @@ const Hero: React.FC = () => {
     const target = document.querySelector("#about");
     if (!target) return;
 
-    // Use LocomotiveScroll when available (desktop), otherwise native smooth scroll (mobile).
-    if (scroll) {
-      scroll.scrollTo(target as HTMLElement);
-    } else {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
+    target.scrollIntoView({ behavior: "smooth" });
   };
 
   return (

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useScroll } from "../../context/scrollContext";
 import gsap from "gsap";
 import { NAV_LINKS, BRAND_NAME, ANIMATIONS } from "../../constants/constants";
 
@@ -7,7 +6,6 @@ const Navbar: React.FC = () => {
   const navRef = useRef<HTMLElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#hero");
-  const { scroll } = useScroll();
 
   useEffect(() => {
     const nav = navRef.current;
@@ -27,10 +25,8 @@ const Navbar: React.FC = () => {
     );
   }, []);
 
-  // Track active section based on LocomotiveScroll position
+  // Track active section based on native scroll position
   useEffect(() => {
-    if (!scroll) return;
-
     const handleScroll = () => {
       // Offset to trigger the active state when it reaches the top area
       const offset = 160;
@@ -53,23 +49,13 @@ const Navbar: React.FC = () => {
       }
     };
 
-    // Attach to LocomotiveScroll event
-    scroll.on("scroll", handleScroll);
-
-    // Initial check
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
     return () => {
-      // Detach listener if the scroll instance supports `off`
-      const maybeWithOff = scroll as unknown as {
-        off?: (event: string, cb: () => void) => void;
-      };
-
-      if (typeof maybeWithOff.off === "function") {
-        maybeWithOff.off("scroll", handleScroll);
-      }
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [scroll, activeSection]);
+  }, [activeSection]);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLElement>,
@@ -81,25 +67,10 @@ const Navbar: React.FC = () => {
     const target = document.querySelector(targetId);
     if (!target) return;
 
-    // Determine if we should use native scroll (mobile or if Locomotive is not smooth)
-    const isMobile = window.innerWidth <= 768;
-
     // Always update active section immediately for better UX
     setActiveSection(targetId);
 
-    if (scroll && !isMobile) {
-      // Use LocomotiveScroll on desktop for smooth experience
-      try {
-        scroll.scrollTo(target as HTMLElement);
-      } catch (error) {
-        console.warn("LocomotiveScroll failed, falling back to native", error);
-        target.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      // Fallback to native smooth scroll on mobile or if scroll instance is missing
-      // Native scroll is more reliable for mobile overlays and non-smooth modes
-      target.scrollIntoView({ behavior: "smooth" });
-    }
+    target.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -145,7 +116,10 @@ const Navbar: React.FC = () => {
             // Contact CTA Button
             if (isContact) {
               return (
-                <div key={link.id} className="w-full md:w-auto px-8 md:px-0 mt-4 md:mt-0">
+                <div
+                  key={link.id}
+                  className="w-full md:w-auto px-8 md:px-0 mt-4 md:mt-0"
+                >
                   <a
                     href={link.id}
                     className="flex items-center justify-center px-8 py-3 text-sm font-semibold text-secondary border-2 border-secondary/40 rounded-full bg-secondary/5 backdrop-blur-sm transition-all duration-base hover:bg-secondary/10 hover:border-secondary/60 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:scale-105 whitespace-nowrap"
@@ -172,7 +146,9 @@ const Navbar: React.FC = () => {
                 {link.label}
                 <span
                   className={`absolute -bottom-1 md:bottom-0 left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 h-0.5 bg-secondary transition-all duration-base ${
-                    isActive ? "w-1/4 md:w-full" : "w-0 group-hover:w-1/4 md:group-hover:w-full"
+                    isActive
+                      ? "w-1/4 md:w-full"
+                      : "w-0 group-hover:w-1/4 md:group-hover:w-full"
                   }`}
                 ></span>
               </a>
