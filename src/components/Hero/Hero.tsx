@@ -58,9 +58,15 @@ const Hero: React.FC = () => {
   }, []);
 
   const handleCTAClick = () => {
-    if (!scroll) return;
     const target = document.querySelector("#about");
-    if (target) scroll.scrollTo(target as HTMLElement);
+    if (!target) return;
+
+    // Use LocomotiveScroll when available (desktop), otherwise native smooth scroll (mobile).
+    if (scroll) {
+      scroll.scrollTo(target as HTMLElement);
+    } else {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
