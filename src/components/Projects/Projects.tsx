@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { GithubLogo, ArrowUpRight } from "@phosphor-icons/react";
+// import { GithubLogo, ArrowUpRight } from "@phosphor-icons/react";
 import { SPACING } from "../../constants/tokens";
 import { PROJECTS, TEXT_CONTENT } from "../../constants/constants";
 import Section from "../common/Section";
@@ -44,22 +44,22 @@ const Projects: React.FC = () => {
                       {project.title}
                     </h3>
                     {/* Links - Always visible, subtle */}
-                    <div className="flex gap-2 shrink-0">
+                    {/* <div className="flex gap-2 shrink-0">
                       <a
                         href={project.links.github}
                         className="w-size-sm h-size-sm flex justify-center items-center bg-white/8 border border-white/12 rounded-md text-text transition-all duration-fast hover:bg-white/15 hover:border-white/25 hover:scale-110"
-                        title="GitHub Repository"
+                        title="Project code and live environment are private due to privacy and data considerations."
                       >
                         <GithubLogo size={14} weight="bold" />
                       </a>
                       <a
                         href={project.links.live}
                         className="w-size-sm h-size-sm flex justify-center items-center bg-white/8 border border-white/12 rounded-md text-text transition-all duration-fast hover:bg-white/15 hover:border-white/25 hover:scale-110"
-                        title="Live Demo"
+                        title="Project code and live environment are private due to privacy and data considerations."
                       >
                         <ArrowUpRight size={14} weight="bold" />
                       </a>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* Role / Contribution - Primary info after title */}
@@ -85,9 +85,21 @@ const Projects: React.FC = () => {
                   </div>
 
                   {/* Reflection / Learning - Optional context */}
-                  <p className="text-xs text-text-muted leading-normal italic pt-md border-t border-white/8">
+                  <p className="text-xs text-text-muted leading-normal italic pt-4 border-t border-white/8">
                     {project.reflection}
                   </p>
+
+                  {/* Case Study CTA Button */}
+                  {project.links.caseStudy && (
+                    <div className="flex justify-center pt-4 mt-auto">
+                      <a
+                        href={project.links.caseStudy}
+                        className="px-6 py-2.5 bg-white/10 border border-white/20 rounded-lg text-sm font-semibold text-text transition-all duration-base hover:bg-white/15 hover:border-white/30 hover:shadow-md hover:scale-105"
+                      >
+                        View case study
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

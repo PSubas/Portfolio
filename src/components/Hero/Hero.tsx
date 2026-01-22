@@ -1,62 +1,62 @@
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ANIMATIONS, BRAND_NAME } from "../../constants/constants";
+import React, { useRef } from "react";
+// import gsap from "gsap";
+import { BRAND_NAME } from "../../constants/constants";
 import { HERO, SPACING } from "../../constants/tokens";
 import PrimaryButton from "../UI/Button/PrimaryButton";
 import Section from "../common/Section";
 
 const Hero: React.FC = () => {
-  const roleRef = useRef<HTMLParagraphElement>(null);
+  // const roleRef = useRef<HTMLParagraphElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const ctasRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.4 });
+  // useEffect(() => {
+  //   const tl = gsap.timeline({ delay: 0.4 });
 
-    tl.fromTo(
-      containerRef.current,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-    )
-      .fromTo(
-        roleRef.current,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-        0.2,
-      )
-      .fromTo(
-        titleRef.current,
-        { opacity: 0, y: 20, filter: "blur(8px)" },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: ANIMATIONS.TITLE_ANIMATION.duration,
-          ease: "power3.out",
-        },
-        "-=0.3",
-      )
-      .fromTo(
-        descriptionRef.current,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-        "-=0.2",
-      )
-      .fromTo(
-        ctasRef.current,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-        "-=0.2",
-      );
+  //   tl.fromTo(
+  //     containerRef.current,
+  //     { opacity: 0, y: 30 },
+  //     { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+  //   )
+  //     .fromTo(
+  //       roleRef.current,
+  //       { opacity: 0, y: 10 },
+  //       { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+  //       0.2,
+  //     )
+  //     .fromTo(
+  //       titleRef.current,
+  //       { opacity: 0, y: 20, filter: "blur(8px)" },
+  //       {
+  //         opacity: 1,
+  //         y: 0,
+  //         filter: "blur(0px)",
+  //         duration: ANIMATIONS.TITLE_ANIMATION.duration,
+  //         ease: "power3.out",
+  //       },
+  //       "-=0.3",
+  //     )
+  //     .fromTo(
+  //       descriptionRef.current,
+  //       { opacity: 0, y: 10 },
+  //       { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+  //       "-=0.2",
+  //     )
+  //     .fromTo(
+  //       ctasRef.current,
+  //       { opacity: 0, y: 10 },
+  //       { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+  //       "-=0.2",
+  //     );
 
-    gsap.to(".orb", ANIMATIONS.ORB_ANIMATION);
+  //   gsap.to(".orb", ANIMATIONS.ORB_ANIMATION);
 
-    return () => {
-      tl.kill();
-    };
-  }, []);
+  //   return () => {
+  //     tl.kill();
+  //   };
+  // }, []);
 
   const handleScrollTo = (sectionId: string) => {
     const target = document.querySelector(sectionId);

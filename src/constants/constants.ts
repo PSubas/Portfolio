@@ -28,38 +28,46 @@ export interface Project {
   role: string;
   reflection: string;
   links: {
-    github: string;
-    live: string;
+    caseStudy?: string;
+    github?: string;
+    live?: string;
   };
 }
 
 export const PROJECTS: Project[] = [
   {
-    title: "Project Alpha",
-    type: "E-commerce Platform",
-    image: "https://placehold.co/600x400/1a1a1a/FFF",
-    tech: ["React", "Node", "Stripe"],
-    role: "Frontend development & Stripe integration",
-    reflection: "Built a scalable payment system serving 10k+ users",
-    links: { github: "#", live: "#" },
+    title: "Social Reviews & Community Platform",
+    type: "Production Social Application",
+    image: "/generated_image.png",
+    tech: ["Next.js", "TypeScript", "Node.js"],
+    role: "Frontend development · End-to-end feature implementation",
+    reflection:
+      "Implemented user-facing social features such as reviews and discussions with emphasis on intuitive UX, scalable state management, and smooth real-time interactions.",
+    links: { caseStudy: "/projects/social-platform", github: "#", live: "#" },
   },
   {
-    title: "Project Beta",
-    type: "Social Dashboard",
-    image: "https://placehold.co/600x400/2a2a2a/FFF",
-    tech: ["Vue", "Firebase", "D3"],
-    role: "Full-stack development & data visualization",
-    reflection: "Designed real-time analytics dashboard for 500+ creators",
-    links: { github: "#", live: "#" },
+    title: "Internal Admin Dashboard",
+    type: "Internal Admin Tool · Moderation & Management",
+    image: "/Internal Dashboard.jpeg",
+    tech: ["Next.js", "TypeScript", "Node.js"],
+    role: "Frontend ownership of core interaction flows",
+    reflection:
+      "Built internal dashboards to support moderation and content management, emphasizing data clarity, efficient workflows, and maintainable UI patterns.",
+    links: {
+      caseStudy: "/projects/social-platform",
+      github: "#",
+      live: "#",
+    },
   },
   {
-    title: "Project Gamma",
-    type: "AI Chat Interface",
-    image: "https://placehold.co/600x400/3a3a3a/FFF",
-    tech: ["Next.js", "OpenAI", "Tailwind"],
-    role: "Frontend & API integration",
-    reflection: "Optimized chat latency from 2s to 200ms using streaming",
-    links: { github: "#", live: "#" },
+    title: "Personal Portfolio Website",
+    type: "Portfolio & Case Studies",
+    image: "/Portfolio-SS.png",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+    role: "Full-stack development · Design & implementation",
+    reflection:
+      "Designed, built, and deployed a personal portfolio to present projects and case studies, with a focus on responsive design, performance, and clear content hierarchy.",
+    links: { github: "#", live: "https://www.pantasubas.com.np" },
   },
 ];
 

@@ -1,36 +1,40 @@
 import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { NAV_LINKS, BRAND_NAME, ANIMATIONS } from "../../constants/constants";
+// import gsap from "gsap";
+import { NAV_LINKS, BRAND_NAME } from "../../constants/constants";
 
 const Navbar: React.FC = () => {
   const navRef = useRef<HTMLElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#hero");
+  const clickTimeRef = useRef<number>(0);
 
-  useEffect(() => {
-    const nav = navRef.current;
-    if (!nav) return;
+  // useEffect(() => {
+  //   const nav = navRef.current;
+  //   if (!nav) return;
 
-    // Entrance animation
-    gsap.fromTo(
-      nav,
-      { y: -100, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: ANIMATIONS.NAVBAR_ENTRANCE.duration,
-        delay: ANIMATIONS.NAVBAR_ENTRANCE.delay,
-        ease: ANIMATIONS.NAVBAR_ENTRANCE.ease,
-      },
-    );
-  }, []);
+  //   // Entrance animation
+  //   gsap.fromTo(
+  //     nav,
+  //     { y: -100, opacity: 0 },
+  //     {
+  //       y: 0,
+  //       opacity: 1,
+  //       duration: ANIMATIONS.NAVBAR_ENTRANCE.duration,
+  //       delay: ANIMATIONS.NAVBAR_ENTRANCE.delay,
+  //       ease: ANIMATIONS.NAVBAR_ENTRANCE.ease,
+  //     },
+  //   );
+  // }, []);
 
   // Track active section based on native scroll position
   useEffect(() => {
     const handleScroll = () => {
-      // Offset to trigger the active state when it reaches the top area
+      // Skip updating if a click happened less than 800ms ago
+      const timeSinceClick = Date.now() - clickTimeRef.current;
+      if (timeSinceClick < 800) return;
+
       const offset = 160;
-      let current = activeSection;
+      let current = "#hero";
 
       // Check sections from bottom to top to find the current one
       for (let i = NAV_LINKS.length - 1; i >= 0; i--) {
@@ -44,9 +48,7 @@ const Navbar: React.FC = () => {
         }
       }
 
-      if (current !== activeSection) {
-        setActiveSection(current);
-      }
+      setActiveSection(current);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -55,7 +57,7 @@ const Navbar: React.FC = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [activeSection]);
+  }, []);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLElement>,
@@ -67,7 +69,10 @@ const Navbar: React.FC = () => {
     const target = document.querySelector(targetId);
     if (!target) return;
 
-    // Always update active section immediately for better UX
+    // Record the click time to prevent scroll handler from interfering
+    clickTimeRef.current = Date.now();
+
+    // Update active section immediately
     setActiveSection(targetId);
 
     target.scrollIntoView({ behavior: "smooth" });

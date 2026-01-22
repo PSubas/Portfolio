@@ -22,7 +22,7 @@ const About: React.FC = () => {
           <p className="text-xl md:text-2xl font-bold leading-snug text-text pb-8">
             I build{" "}
             <span className="text-secondary">production-grade interfaces</span>{" "}
-            at scale.
+            designed to scale.
           </p>
 
           {/* Proof Points - Answers: What problems can you handle? Can I trust you with ownership? */}
@@ -39,7 +39,7 @@ const About: React.FC = () => {
                 <span className="text-secondary font-bold shrink-0">→</span>
                 <span>
                   <span className="text-text font-semibold">
-                    Full-stack ownership
+                    Feature ownership
                   </span>{" "}
                   from API integration to production deployment
                 </span>

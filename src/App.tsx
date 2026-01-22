@@ -1,17 +1,23 @@
-import Layout from "./components/Layout/Layout";
-import Hero from "./components/Hero/Hero";
-import About from "./components/About/About";
-import Projects from "./components/Projects/Projects";
-import Contact from "./components/Contact/Contact";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import SocialPlatformCaseStudy from "./pages/SocialPlatformCaseStudy";
+// import AIChatCaseStudy from "./pages/AIChatCaseStudy";
 
 function App() {
   return (
-    <Layout>
-      <Hero />
-      <About />
-      <Projects />
-      <Contact />
-    </Layout>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/projects/social-platform"
+          element={<SocialPlatformCaseStudy />}
+        />
+        {/* <Route
+          path="/projects/ai-chat"
+          element={<AIChatCaseStudy />}
+        /> */}
+      </Routes>
+    </Router>
   );
 }
 
