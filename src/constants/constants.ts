@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
   {
     title: "Internal Admin Dashboard",
     type: "Internal Admin Tool · Moderation & Management",
-    image: "/Internal Dashboard.jpeg",
+    image: "",
     tech: ["Next.js", "TypeScript", "Node.js"],
     role: "Frontend ownership of core interaction flows",
     reflection:
