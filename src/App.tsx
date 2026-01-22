@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import SocialPlatformCaseStudy from "./pages/SocialPlatformCaseStudy";
+// import SocialPlatformCaseStudy from "./pages/SocialPlatformCaseStudy";
 // import AIChatCaseStudy from "./pages/AIChatCaseStudy";
 
 function App() {
@@ -8,10 +8,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
+        {/* <Route
           path="/projects/social-platform"
           element={<SocialPlatformCaseStudy />}
-        />
+        /> */}
         {/* <Route
           path="/projects/ai-chat"
           element={<AIChatCaseStudy />}
