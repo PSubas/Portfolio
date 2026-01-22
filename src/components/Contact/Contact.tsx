@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   PaperPlaneRight,
   Envelope,
@@ -18,6 +18,7 @@ import Section from "../common/Section";
 
 const Contact: React.FC = () => {
   const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
+  const sectionRef = useRef<HTMLElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,20 +31,19 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <Section id="contact" className="items-center justify-center min-h-screen">
+    <Section
+      id="contact"
+      ref={sectionRef}
+      className="items-center justify-center min-h-screen"
+    >
       {/* Ambient Orbs */}
-      <div
-        className="absolute bg-primary rounded-full blur-[80px] z-0 pointer-events-none opacity-15 top-[10%] -left-[5%] animate-float"
-        style={{ width: "25rem", height: "25rem" }}
-      ></div>
-      <div
-        className="absolute bg-secondary rounded-full blur-[80px] z-0 pointer-events-none opacity-10 bottom-[10%] -right-[10%] animate-float-reverse"
-        style={{ width: "18.75rem", height: "18.75rem" }}
-      ></div>
+
+      <div className="absolute  rounded-full blur-[80px] z-0 pointer-events-none opacity-15 top-[10%] -left-[5%] animate-float"></div>
+      <div className="absolute  rounded-full blur-[80px] z-0 pointer-events-none opacity-10 bottom-[10%] -right-[10%] animate-float-reverse"></div>
 
       {/* Main Container */}
       <div className="relative z-10 w-full flex flex-col">
-        <div className="flex flex-col md:flex-row gap-12 lg:gap-16 w-full items-start">
+        <div className="flex flex-col md:flex-row gap-12 lg:gap-12 w-full items-start">
           {/* Left Side - Contact Info */}
           <div className="w-full md:w-1/2">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold pb-4 sm:pb-6 bg-linear-to-r from-text to-primary bg-clip-text text-transparent">
