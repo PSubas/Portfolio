@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
   {
     title: "Internal Admin Dashboard",
     type: "Internal Admin Tool · Moderation & Management",
-    image: "",
+    image: "/grospp_dashboard_blurred.png",
     tech: ["Next.js", "TypeScript", "Node.js"],
     role: "Frontend ownership of core interaction flows",
     reflection:
@@ -82,15 +82,33 @@ export interface SocialLink {
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { platform: "Email", url: "#", icon: "Envelope" },
-  { platform: "LinkedIn", url: "#", icon: "LinkedinLogo" },
-  { platform: "GitHub", url: "#", icon: "GithubLogo" },
+  {
+    platform: "Email",
+    url: "https://mail.google.com/mail/?view=cm&fs=1&to=subas.panta.dev@gmail.com",
+    icon: "Envelope",
+  },
+  {
+    platform: "LinkedIn",
+    url: "https://www.linkedin.com/in/subas-panta/",
+    icon: "LinkedinLogo",
+  },
+  { platform: "GitHub", url: "https://github.com/PSubas", icon: "GithubLogo" },
 ];
 
 export const CONTACT_MESSAGES = {
   SEND_IDLE: "Send Message",
   SENDING: "Sending...",
   SUCCESS: "Message Sent!",
+} as const;
+
+// ============================================================================
+// EMAILJS CONFIGURATION
+// ============================================================================
+
+export const EMAILJS_CONFIG = {
+  PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+  SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
 } as const;
 
 // ============================================================================

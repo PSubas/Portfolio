@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import {
   PaperPlaneRight,
   Envelope,
@@ -13,21 +14,64 @@ import {
   FORM_PLACEHOLDERS,
   FORM_CONFIG,
   ANIMATIONS,
+  EMAILJS_CONFIG,
 } from "../../constants/constants";
 import Section from "../common/Section";
 
 const Contact: React.FC = () => {
-  const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
   const sectionRef = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Initialize EmailJS
+    console.log(
+      "Initializing EmailJS with public key:",
+      EMAILJS_CONFIG.PUBLIC_KEY,
+    );
+    if (!EMAILJS_CONFIG.PUBLIC_KEY) {
+      console.error(
+        "EmailJS public key is not configured. Check .env.local file.",
+      );
+    }
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("sending");
-    // Simulate sending
-    setTimeout(() => {
+
+    try {
+      // Validate config
+      if (
+        !EMAILJS_CONFIG.SERVICE_ID ||
+        !EMAILJS_CONFIG.TEMPLATE_ID ||
+        !EMAILJS_CONFIG.PUBLIC_KEY
+      ) {
+        throw new Error(
+          "EmailJS configuration is incomplete. Check your .env.local file.",
+        );
+      }
+
+      // Send email using EmailJS
+      await emailjs.sendForm(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        formRef.current!,
+        EMAILJS_CONFIG.PUBLIC_KEY,
+      );
+
       setStatus("success");
+      // Reset form
+      formRef.current?.reset();
       setTimeout(() => setStatus("idle"), ANIMATIONS.FORM_SUCCESS_RESET_DELAY);
-    }, ANIMATIONS.FORM_SUBMIT_DELAY);
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), ANIMATIONS.FORM_SUCCESS_RESET_DELAY);
+    }
   };
 
   return (
@@ -79,12 +123,14 @@ const Contact: React.FC = () => {
 
           {/* Right Side - Form */}
           <form
+            ref={formRef}
             className="w-full md:w-1/2 bg-glass border border-glass-border rounded-xl p-8 flex flex-col gap-8 backdrop-blur-sm"
             onSubmit={handleSubmit}
           >
             <div>
               <input
                 type="text"
+                name="from_name"
                 placeholder={FORM_PLACEHOLDERS.NAME}
                 required
                 className="w-full bg-glass-light border-b-2 border-glass-border rounded px-4 py-6 text-text font-inherit text-base transition-all duration-base focus:outline-none focus:bg-glass-border focus:border-b-primary"
@@ -93,6 +139,7 @@ const Contact: React.FC = () => {
             <div>
               <input
                 type="email"
+                name="email"
                 placeholder={FORM_PLACEHOLDERS.EMAIL}
                 required
                 className="w-full bg-glass-light border-b-2 border-glass-border rounded px-4 py-6 text-text font-inherit text-base transition-all duration-base focus:outline-none focus:bg-glass-border focus:border-b-primary"
@@ -100,6 +147,7 @@ const Contact: React.FC = () => {
             </div>
             <div>
               <textarea
+                name="message"
                 placeholder={FORM_PLACEHOLDERS.MESSAGE}
                 rows={FORM_CONFIG.MESSAGE_ROWS}
                 required
@@ -109,7 +157,8 @@ const Contact: React.FC = () => {
 
             <button
               type="submit"
-              className={`flex items-center justify-center gap-4 p-6 font-bold rounded-lg transition-all duration-base ${status === "success" ? "bg-secondary/20 border border-secondary text-secondary" : "bg-text text-bg hover:bg-primary hover:text-text hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/40"}`}
+              disabled={status === "sending"}
+              className={`flex items-center justify-center gap-4 p-6 font-bold rounded-lg transition-all duration-base ${status === "success" ? "bg-secondary/20 border border-secondary text-secondary" : status === "error" ? "bg-red-500/20 border border-red-500 text-red-500" : "bg-text text-bg hover:bg-primary hover:text-text hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/40 disabled:opacity-50 disabled:cursor-not-allowed"}`}
             >
               {status === "idle" && (
                 <>
@@ -118,6 +167,7 @@ const Contact: React.FC = () => {
               )}
               {status === "sending" && CONTACT_MESSAGES.SENDING}
               {status === "success" && CONTACT_MESSAGES.SUCCESS}
+              {status === "error" && "Failed to send"}
             </button>
           </form>
         </div>

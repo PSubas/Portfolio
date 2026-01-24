@@ -46,7 +46,7 @@ const SocialPlatformCaseStudy: React.FC = () => {
           {/* Project Image */}
           <div className="mb-16 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
             <img
-              src="/Internal Dashboard.jpeg"
+              src="/grospp_dashboard_blurred.png"
               alt="Social Platform & Admin Dashboard"
               className="w-full h-auto"
             />
@@ -175,7 +175,7 @@ const SocialPlatformCaseStudy: React.FC = () => {
                   Frontend
                 </h3>
                 <div className="flex flex-wrap gap-3">
-                  {["React", "TypeScript", "Next.js", "Tailwind CSS"].map(
+                  {["React", "TypeScript", "Next.js", "Styled Components"].map(
                     (tech) => (
                       <span
                         key={tech}
@@ -192,14 +192,16 @@ const SocialPlatformCaseStudy: React.FC = () => {
                   Backend & Tools
                 </h3>
                 <div className="flex flex-wrap gap-3">
-                  {["Node.js", "REST APIs", "TypeScript"].map((tech) => (
-                    <span
-                      key={tech}
-                      className="bg-linear-to-br from-primary/20 to-secondary/20 border border-primary/30 px-4 py-2 rounded-lg text-sm text-text font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  {["Node.js", "Express", "REST APIs", "TypeScript"].map(
+                    (tech) => (
+                      <span
+                        key={tech}
+                        className="bg-linear-to-br from-primary/20 to-secondary/20 border border-primary/30 px-4 py-2 rounded-lg text-sm text-text font-medium"
+                      >
+                        {tech}
+                      </span>
+                    ),
+                  )}
                 </div>
               </div>
             </div>
@@ -475,9 +477,8 @@ const SocialPlatformCaseStudy: React.FC = () => {
           {/* CTA Section */}
           <div className="flex flex-col items-center text-center">
             <p className="text-text-muted mb-6 leading-relaxed text-lg">
-              Ready to discuss this project or explore collaboration
-              opportunities? I'd love to hear about your ideas and how I can
-              contribute.
+              Ready to discuss further or explore collaboration opportunities?
+              I'd love to hear about your ideas and how I can contribute.
             </p>
             <Link
               to="/#contact"
