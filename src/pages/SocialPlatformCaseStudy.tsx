@@ -469,9 +469,6 @@ const SocialPlatformCaseStudy: React.FC = () => {
               architectural decisions, and trade-offs in more detail during a
               conversation.
             </p>
-            <p className="text-text-muted text-sm italic">
-              // TODO: Add live demo link when confidentiality allows
-            </p>
           </div>
 
           {/* CTA Section */}
