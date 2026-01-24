@@ -15,7 +15,7 @@ const particles: ParticleStyle[] = [...Array(10)].map(() => ({
 const Footer: React.FC = () => {
   return (
     <footer
-      className="relative pb-8 bg-black border-t border-glass-border overflow-hidden"
+      className="relative  pb-8 bg-black border-t border-glass-border overflow-hidden"
       data-scroll-section
     >
       <div className="absolute inset-0 pointer-events-none">
@@ -29,22 +29,8 @@ const Footer: React.FC = () => {
         ))}
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-2 relative z-10 text-text-muted text-sm text-center sm:text-left">
+      <div className="flex justify-center items-center  relative z-10 text-text-muted text-sm text-center pt-4">
         <p>&copy; {new Date().getFullYear()} Subas. All rights reserved.</p>
-        <div className="flex gap-6">
-          <a
-            href="#"
-            className="text-text-muted transition-colors duration-base hover:text-text"
-          >
-            Privacy
-          </a>
-          <a
-            href="#"
-            className="text-text-muted transition-colors duration-base hover:text-text"
-          >
-            Terms
-          </a>
-        </div>
       </div>
     </footer>
   );
